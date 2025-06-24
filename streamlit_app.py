@@ -37,23 +37,26 @@ st.sidebar.markdown("- **Target:** Heating Load (Y1)")
 st.sidebar.markdown("- **Input features:** 8 building parameters")
 st.sidebar.markdown("- **Source:** [UCI ML Repository](https://archive.ics.uci.edu/ml/datasets/energy+efficiency)")
 
-# feature labels
-feature_inputs = {
-    "Relative Compactness": {"min": 0.5, "max": 1.0, "step": 0.01, "help": "Ratio of volume to surface area"},
-    "Surface Area": {"min": 500.0, "max": 900.0, "step": 1.0, "help": "Total external surface (m²)"},
-    "Wall Area": {"min": 200.0, "max": 400.0, "step": 1.0, "help": "Total wall area (m²)"},
-    "Roof Area": {"min": 100.0, "max": 300.0, "step": 1.0, "help": "Total roof area (m²)"},
-    "Overall Height": {"min": 3.5, "max": 7.0, "step": 0.5, "help": "Height of the building (3.5 or 7.0)"},
-    "Orientation": {"min": 2, "max": 5, "step": 1, "help": "Integer (2–5) indicating orientation"},
-    "Glazing Area": {"min": 0.0, "max": 0.4, "step": 0.01, "help": "Ratio of glazing to wall area"},
-    "Glazing Area Distribution": {"min": 0, "max": 5, "step": 1, "help": "Integer (0–5) for glazing layout"}
-}
 
-# User input
+#input
 st.write("### Building Characteristics")
 features = []
-for label, config in feature_inputs.items():
-    features.append(st.number_input(label, **config))
+
+feature_inputs = {
+    "Relative Compactness": {"min_value": 0.5, "max_value": 1.0, "step": 0.01, "note": "Typically ranges from 0.5 to 1.0"},
+    "Surface Area": {"min_value": 500.0, "max_value": 900.0, "step": 1.0, "note": "Total external surface in m²"},
+    "Wall Area": {"min_value": 200.0, "max_value": 400.0, "step": 1.0, "note": "Total wall area in m²"},
+    "Roof Area": {"min_value": 100.0, "max_value": 300.0, "step": 1.0, "note": "Roof area in m²"},
+    "Overall Height": {"min_value": 3.5, "max_value": 7.0, "step": 0.5, "note": "Building height — 3.5 or 7.0"},
+    "Orientation": {"min_value": 2, "max_value": 5, "step": 1, "note": "Integer from 2 to 5"},
+    "Glazing Area": {"min_value": 0.0, "max_value": 0.4, "step": 0.01, "note": "Ratio from 0.0 to 0.4"},
+    "Glazing Area Distribution": {"min_value": 0, "max_value": 5, "step": 1, "note": "Integer from 0 to 5"}
+}
+
+for label, params in feature_inputs.items():
+    st.caption(params["note"])
+    features.append(st.number_input(label, min_value=params["min_value"], max_value=params["max_value"], step=params["step"]))
+
 
 # Prediction 
 if st.button("Predict"):
