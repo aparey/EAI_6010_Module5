@@ -28,16 +28,28 @@ model.eval()
 # App title
 st.title("Heating Load Prediction App")
 
+# Descriptive feature labels based on the ENB dataset
+feature_labels = [
+    "Relative Compactness",
+    "Surface Area",
+    "Wall Area",
+    "Roof Area",
+    "Overall Height",
+    "Orientation",
+    "Glazing Area",
+    "Glazing Area Distribution"
+]
+
 # User input
-st.write("Enter 8 input features:")
+st.write("Enter building characteristics:")
 features = []
-for i in range(8):
-    features.append(st.number_input(f"Feature {i+1}", step=0.1))
+for label in feature_labels:
+    features.append(st.number_input(label, step=0.1))
 
 if st.button("Predict"):
     input_array = np.array(features).reshape(1, -1)
 
-    # Assume the scaler was fitted on full dataset; simulate loading it
+    # Load and fit the scaler on the full dataset
     df = pd.read_excel("ENB2012_data.xlsx")
     scaler = StandardScaler()
     scaler.fit(df.iloc[:, 0:8].values)
