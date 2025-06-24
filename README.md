@@ -2,9 +2,6 @@
 
 A microservice web application that predicts the **heating load (Y1)** of a building using a neural network regression model trained on the **ENB2012 dataset**. Built with **PyTorch** and deployed using **Streamlit Cloud**, the app allows users to interactively input building parameters and receive real-time energy performance predictions.
 
-![Streamlit App Screenshot](<img width="391" alt="image" src="https://github.com/user-attachments/assets/873bd83d-c1c4-46c1-a2fe-6fd24d7d97ec" />
-)
-
 ---
 
 ##  Live Demo
